@@ -8,15 +8,15 @@ import axios from "axios";
 
 // Usage should look like: `withAuth().get('http://api.com/friends').then(etc)`
 export default function withAuth() {
-	const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
 
-	const axiosInstance = axios.create({
-		baseURL: "http://localhost:3000/api",
-		headers: {
-			"Content-Type": "application/json",
-			Authorization: token
-		}
-	});
+  const axiosInstance = axios.create({
+    baseURL: "https://bw-a-to-z-experiences.herokuapp.com/api",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: token
+    }
+  });
 
-	return axiosInstance;
+  return axiosInstance;
 }
