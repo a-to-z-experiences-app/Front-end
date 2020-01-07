@@ -1,10 +1,10 @@
 import * as types from "./actionTypes";
-import axios from "axios";
+import axiosWithAuth from "../helpers/axios";
 
 // Step 7: Design action creator functions
 export const loadExperiences = () => dispatch => {
-	axios
-		.get("http://localhost:3333/smurfs")
+	axiosWithAuth
+		.get("/experiences?")
 		.then(response => {
 			dispatch({
 				type: types.GET_EXPERIENCES,
