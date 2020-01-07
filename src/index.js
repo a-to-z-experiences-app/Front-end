@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 // yarn add redux react-redux redux-thunk
 import { experiencesReducer, userReducer } from "./state/reducers";

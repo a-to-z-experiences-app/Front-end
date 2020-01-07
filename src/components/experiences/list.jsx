@@ -1,6 +1,3 @@
-// Step 8: Use "connect" to plug the component to redux
-// Step 9: Plug the action creators into the component
-
 import React from "react";
 import { useEffect } from "react";
 import { loadExperiences } from "../../state/actionCreators";
@@ -13,12 +10,18 @@ const Experiences = ({ experiences, loadExperiences }) => {
 
 	return (
 		<>
-			{JSON.stringify(experiences)}
+			<h1>Experiences: </h1>
 			{experiences.map(experience => (
-				<div>{experience.title}</div>
+				<div style={{ border: "2px solid black" }}>
+					{experience.title}
+					<br />
+					{experience.description}
+				</div>
 			))}
 		</>
 	);
 };
 
+// Step 8: Use "connect" to plug the component to redux
+// Step 9: Plug the action creators into the component
 export default connect(state => state, { loadExperiences })(Experiences);
