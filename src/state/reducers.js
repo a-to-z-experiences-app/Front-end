@@ -40,6 +40,8 @@ export function experiencesReducer(
 			return experiences;
 		case types.DELETE_EXPERIENCE:
 			return experiences;
+		case types.GET_EXPERIENCES:
+			return action.payload.experiences;
 		default:
 			return experiences;
 	}

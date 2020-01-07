@@ -3,13 +3,15 @@ import axiosWithAuth from "../helpers/axios";
 
 // Step 7: Design action creator functions
 export const loadExperiences = () => dispatch => {
-	axiosWithAuth
-		.get("/experiences?")
+	axiosWithAuth()
+		.get("/experiences")
 		.then(response => {
+			console.log(response.data.experiences);
+
 			dispatch({
 				type: types.GET_EXPERIENCES,
 				payload: {
-					experiences: response.data
+					experiences: response.data.experiences
 				}
 			});
 		})
@@ -19,12 +21,12 @@ export const loadExperiences = () => dispatch => {
 };
 
 // Step 7: Design action creator functions
-export const updateForm = ({ name, value }) => {
-	return {
-		type: types.UPDATE_FORM,
-		payload: {
-			name,
-			value
-		}
-	};
-};
+// export const updateForm = ({ name, value }) => {
+// 	return {
+// 		type: types.UPDATE_FORM,
+// 		payload: {
+// 			name,
+// 			value
+// 		}
+// 	};
+// };

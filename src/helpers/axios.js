@@ -11,7 +11,7 @@ export default function withAuth() {
 	const token = localStorage.getItem("token");
 
 	const axiosInstance = axios.create({
-		baseURL: "http://localhost:5000",
+		baseURL: "http://localhost:3000/api",
 		headers: {
 			"Content-Type": "application/json",
 			Authorization: token
