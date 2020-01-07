@@ -2,49 +2,49 @@ import * as types from "./actionTypes";
 
 // STEP 1: Decide state slices
 const initialState = {
-	user: {
-		id: 0,
-		name: "?",
-		token: "?"
-	},
-	experiences: []
+  user: {
+    id: 0,
+    name: "?",
+    token: "?"
+  },
+  experiences: []
 };
 
 // STEP 3: create reducers
 export function userReducer(user = initialState.user, action) {
-	switch (action.type) {
-		case types.REGISTER:
-			return action.payload.user;
-		case types.LOGIN:
-			return user;
-		case types.UPDATE_USER:
-			return user;
-		case types.DELETE_USER:
-			return user;
-		default:
-			return user;
-	}
+  switch (action.type) {
+    case types.REGISTER:
+      return action.payload.user;
+    case types.LOGIN:
+      return action.payload.user;
+    case types.UPDATE_USER:
+      return user;
+    case types.DELETE_USER:
+      return user;
+    default:
+      return user;
+  }
 }
 
 // STEP 3: create reducers
 export function experiencesReducer(
-	experiences = initialState.experiences,
-	action
+  experiences = initialState.experiences,
+  action
 ) {
-	switch (action.type) {
-		case types.CREATE_EXPERIENCE:
-			return action.payload.experience;
-		case types.READ_EXPERIENCE:
-			return experiences;
-		case types.UPDATE_EXPERIENCE:
-			return experiences;
-		case types.DELETE_EXPERIENCE:
-			return experiences;
-		case types.GET_EXPERIENCES:
-			return action.payload.experiences;
-		default:
-			return experiences;
-	}
+  switch (action.type) {
+    case types.CREATE_EXPERIENCE:
+      return action.payload.experience;
+    case types.READ_EXPERIENCE:
+      return experiences;
+    case types.UPDATE_EXPERIENCE:
+      return experiences;
+    case types.DELETE_EXPERIENCE:
+      return experiences;
+    case types.GET_EXPERIENCES:
+      return action.payload.experiences;
+    default:
+      return experiences;
+  }
 }
 
 // STEP 3: create reducers
