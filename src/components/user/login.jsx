@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { NavLink, Button, Form, Label, Input, FormGroup } from "reactstrap";
+import { Button, Form, Input, FormGroup } from "reactstrap";
 import styled from "styled-components";
-import withAuth from "../../axios/index";
+import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { loginUser } from "../../state/actionCreators";
+import logo from "../../images/logo.png";
 
 const LogIn = ({ user, loginUser }) => {
   const [userData, setUserData] = useState({
@@ -27,11 +28,20 @@ const LogIn = ({ user, loginUser }) => {
     <LoginForm>
       {JSON.stringify(user)}
       <div className="topHalf">
-        {/* <img src={} alt="logo" /> */}
-        <h2>Sign In / Register</h2>
+        <img src={logo} alt="logo" />
+        <h2>
+          Sign In /{" "}
+          <NavLink className="navLink" to="/register">
+            Register
+          </NavLink>
+        </h2>
       </div>
 
       <div className="bottomHalf">
+        <br />
+        <br />
+        <br />
+        <br />
         <Form onSubmit={handleSubmit}>
           <FormGroup>
             <Input
@@ -45,8 +55,6 @@ const LogIn = ({ user, loginUser }) => {
           </FormGroup>
           <br />
           <br />
-          <br />
-          <br />
           <FormGroup>
             <Input
               type="password"
@@ -57,9 +65,6 @@ const LogIn = ({ user, loginUser }) => {
               onChange={handleChange}
             />
           </FormGroup>
-          <br />
-          <br />
-          <br />
           <br />
           <br />
           <br />
@@ -80,6 +85,7 @@ const LoginForm = styled.form`
   img {
     max-height: 100px;
     max-width: 100px;
+    margin-left: 45%;
   }
   h2 {
     color: #fe0202;
@@ -88,16 +94,24 @@ const LoginForm = styled.form`
     font-weight: normal;
     font-size: 48px;
     line-height: 56px;
-    margin-right: 15%;
+    margin-left: 15%;
     padding-top: 20%;
+  }
+  .navLink {
+    text-decoration: none;
+    color: #d3d3d3;
+  }
+  .bottomHalf {
+    margin-left: 30%;
   }
   button {
     color: #fe0202;
-    width: 300px;
-    height: 70px;
+    width: 220px;
+    height: 40px;
     border: 1px solid #fe0202;
     border-radius: 2rem;
-    font-size: 36px;
+    font-size: 24px;
+    margin-bottom: 15%;
   }
 `;
 
