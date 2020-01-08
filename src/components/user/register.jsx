@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { registerUser } from "../../state/actionCreators";
 import logo from "../../images/logo.png";
 
-const Register = ({ user, registerUser }) => {
+const Register = ({ user, registerUser, history }) => {
   const [userData, setUserData] = useState({
     username: "",
     password: ""
@@ -17,12 +17,12 @@ const Register = ({ user, registerUser }) => {
       ...userData,
       [e.target.name]: e.target.value
     });
-    console.log(userData);
   };
 
   const handleSubmit = e => {
     e.preventDefault();
     registerUser(userData);
+    history.push("/");
   };
   return (
     <LoginForm>
@@ -88,9 +88,9 @@ const Register = ({ user, registerUser }) => {
           <br />
           <br />
           <br />
-          <NavLink to="/">
-            <Button>Register</Button>
-          </NavLink>
+          {/* <NavLink to="/"> */}
+          <Button>Register</Button>
+          {/* </NavLink> */}
         </Form>
       </div>
     </LoginForm>
