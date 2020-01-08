@@ -10,3 +10,6 @@ export const UPDATE_EXPERIENCE = "UPDATE_EXPERIENCE";
 export const DELETE_EXPERIENCE = "DELETE_EXPERIENCE";
 
 export const GET_EXPERIENCES = "GET_EXPERIENCES";
+
+export const UPDATE_FORM = "UPDATE_FORM";
+export const EDIT = "EDIT";

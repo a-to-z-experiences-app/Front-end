@@ -7,7 +7,14 @@ const initialState = {
 		name: "?",
 		token: "?"
 	},
-	experiences: []
+	experiences: [],
+	form: {
+		title: "",
+		location: "",
+		price: 1,
+		date: new Date(),
+		description: ""
+	}
 };
 
 // STEP 3: create reducers
@@ -50,20 +57,20 @@ export function experiencesReducer(
 }
 
 // STEP 3: create reducers
-// export function formReducer(form = initialState.form, action) {
-// 	switch (action.type) {
-// 		case types.UPDATE_FORM:
-// 			return {
-// 				...form,
-// 				[action.payload.name]: action.payload.value
-// 			};
-// 		case types.SAVE_FORM:
-// 			console.log("save");
+export function formReducer(form = initialState.form, action) {
+	switch (action.type) {
+		case types.UPDATE_FORM:
+			return {
+				...form,
+				[action.payload.name]: action.payload.value
+			};
+		// case types.SAVE_FORM:
+		// 	console.log("save");
 
-// 			return initialState.form;
-// 		case types.EDIT_SMURF:
-// 			return action.payload.smurf;
-// 		default:
-// 			return form;
-// 	}
-// }
+		// 	return initialState.form;
+		case types.EDIT:
+			return action.payload.experience;
+		default:
+			return form;
+	}
+}
