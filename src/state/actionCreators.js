@@ -24,7 +24,8 @@ export const loginUser = loginData => async dispatch => {
   try {
     const { data } = await axiosWithAuth().post("/login", loginData);
     if (data.token) {
-      localStorage.setItem("token", data.token);
+	  localStorage.setItem("token", data.token);
+	  localStorage.setItem("user", JSON.stringify(data.user));
       dispatch({
         type: types.LOGIN,
         payload: {

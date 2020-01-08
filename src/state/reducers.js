@@ -1,12 +1,10 @@
 import * as types from "./actionTypes";
 
+const user = JSON.parse(localStorage.getItem("user"));
+
 // STEP 1: Decide state slices
 const initialState = {
-	user: {
-		id: 0,
-		name: "?",
-		token: "?"
-	},
+	user: user,
 	experiences: [],
 	form: {
 		title: "",

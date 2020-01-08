@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../images/logo.png";
+import { connect } from "react-redux";
 
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -22,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-const Menu = () => {
+const Menu = ({ user }) => {
 	const classes = useStyles();
 
 	return (
@@ -42,14 +43,24 @@ const Menu = () => {
 							<img src={logo} alt="" width="50" height="50" />
 						</NavLink>
 					</Typography>
-					<NavLink to="/signin">Sign In</NavLink>
-					<NavLink to="/register">Register</NavLink>
-					<NavLink to="/dashboard">Dashboard</NavLink>
-					<NavLink to="/profile">Profile</NavLink>
+
+					{user !== null && user !== undefined ? (
+						<>
+							<NavLink to="/dashboard">Dashboard</NavLink>
+							<NavLink to="/profile">{user.username}</NavLink>
+						</>
+					) : (
+						<>
+							<NavLink to="/signin">Sign In</NavLink>
+							<NavLink to="/register">Register</NavLink>
+						</>
+					)}
 				</Toolbar>
 			</AppBar>
 		</div>
 	);
 };
 
-export default Menu;
+// Step 8: Use "connect" to plug the component to redux
+// Step 9: Plug the action creators into the component
+export default connect(state => state, {})(Menu);
