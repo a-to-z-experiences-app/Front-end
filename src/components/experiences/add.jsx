@@ -1,5 +1,9 @@
 import React from "react";
-import { saveExperience } from "../../state/actionCreators";
+import {
+	updateForm,
+	saveExperience,
+	getExperience
+} from "../../state/actionCreators";
 import { connect } from "react-redux";
 
 import Button from "@material-ui/core/Button";
@@ -11,39 +15,40 @@ import {
 import "date-fns";
 import DateFnsUtils from "@date-io/date-fns";
 
-const AddExperience = ({ saveExperience }) => {
-	const [experience, setExperience] = React.useState({
-		title: "",
-		location: "",
-		price: 1,
-		date: new Date(),
-		description: ""
-	});
+import { useParams, useHistory } from "react-router";
+
+const AddExperience = ({ form, updateForm, saveExperience, getExperience }) => {
+	let { id } = useParams();
+	let history = useHistory();
+
+	React.useEffect(() => {
+		if (id !== undefined) {
+			getExperience(id);
+		}
+	}, [id]);
 
 	const handleChange = e => {
-		setExperience({
-			...experience,
-			[e.target.name]: e.target.value
-		});
-		console.log(experience);
+		const { name, value } = e.target;
+		updateForm({ name, value });
 	};
 
 	const handleSubmit = e => {
 		e.preventDefault();
-		console.log("save");
+		saveExperience(form);
 
-		saveExperience(experience);
+		history.push("/dashboard");
 	};
 
 	return (
 		<>
+			<h1>New Experience:</h1>
 			<form onSubmit={handleSubmit}>
 				<br />
 				<TextField
 					id="standard-basic"
 					label="Title"
 					name="title"
-					value={experience.title}
+					value={form.title}
 					onChange={handleChange}
 					variant="outlined"
 				/>
@@ -53,7 +58,7 @@ const AddExperience = ({ saveExperience }) => {
 					id="standard-basic"
 					label="Location"
 					name="location"
-					value={experience.location}
+					value={form.location}
 					onChange={handleChange}
 					variant="outlined"
 				/>
@@ -63,7 +68,7 @@ const AddExperience = ({ saveExperience }) => {
 					id="standard-basic"
 					label="Price"
 					name="price"
-					value={experience.price}
+					value={form.price}
 					onChange={handleChange}
 					variant="outlined"
 					type="number"
@@ -76,7 +81,7 @@ const AddExperience = ({ saveExperience }) => {
 						margin="normal"
 						id="date-picker-inline"
 						label="Date"
-						value={experience.date}
+						value={form.date}
 						onChange={handleChange}
 						KeyboardButtonProps={{
 							"aria-label": "change date"
@@ -90,7 +95,7 @@ const AddExperience = ({ saveExperience }) => {
 					id="standard-basic"
 					label="Description"
 					name="description"
-					value={experience.description}
+					value={form.description}
 					onChange={handleChange}
 					variant="outlined"
 					type="number"
@@ -110,4 +115,8 @@ const AddExperience = ({ saveExperience }) => {
 
 // Step 8: Use "connect" to plug the component to redux
 // Step 9: Plug the action creators into the component
-export default connect(state => state, { saveExperience })(AddExperience);
+export default connect(state => state, {
+	updateForm,
+	saveExperience,
+	getExperience
+})(AddExperience);
