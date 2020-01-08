@@ -20,11 +20,32 @@ export const loadExperiences = () => dispatch => {
     });
 };
 
+
+// Step 7: Design action creator functions
+export const loadUserExperiences = userID => dispatch => {
+	axiosWithAuth()
+		.get("/users/" + userID + "/host_experiences")
+		.then(response => {
+			console.log(response.data.experiences);
+
+			dispatch({
+				type: types.GET_EXPERIENCES,
+				payload: {
+					experiences: response.data.experiences
+				}
+			});
+		})
+		.catch(() => {
+			console.log("error!!!");
+		});
+};
+
 export const loginUser = loginData => async dispatch => {
   try {
     const { data } = await axiosWithAuth().post("/login", loginData);
     if (data.token) {
-      localStorage.setItem("token", data.token);
+	  localStorage.setItem("token", data.token);
+	  localStorage.setItem("user", JSON.stringify(data.user));
       dispatch({
         type: types.LOGIN,
         payload: {
@@ -56,7 +77,7 @@ export const registerUser = data => dispatch => {
     });
 };
 
-export const saveExperience = experience => dispatch => {
+export const saveExperience = (experience, userID) => dispatch => {
 	if(experience.id !== undefined) {
 		axiosWithAuth()
 			.put("/experiences/" + experience.id, experience)
@@ -75,7 +96,7 @@ export const saveExperience = experience => dispatch => {
 			});
 	} else {
 		axiosWithAuth()
-			.post("/experiences", experience)
+			.post("/experiences", { ...experience, user_id: userID })
 			.then(response => {
 				console.log(response.data.experiences);
 

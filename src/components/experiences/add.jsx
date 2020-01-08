@@ -17,7 +17,7 @@ import DateFnsUtils from "@date-io/date-fns";
 
 import { useParams, useHistory } from "react-router";
 
-const AddExperience = ({ form, updateForm, saveExperience, getExperience }) => {
+const AddExperience = ({ form, updateForm, saveExperience, getExperience, user }) => {
 	let { id } = useParams();
 	let history = useHistory();
 
@@ -34,7 +34,7 @@ const AddExperience = ({ form, updateForm, saveExperience, getExperience }) => {
 
 	const handleSubmit = e => {
 		e.preventDefault();
-		saveExperience(form);
+		saveExperience(form, user.id);
 
 		history.push("/dashboard");
 	};

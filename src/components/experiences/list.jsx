@@ -1,6 +1,10 @@
 import React from "react";
 import { useEffect } from "react";
-import { loadExperiences, deleteExperience } from "../../state/actionCreators";
+import {
+	loadUserExperiences,
+	loadExperiences,
+	deleteExperience
+} from "../../state/actionCreators";
 import { connect } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
 
@@ -36,9 +40,16 @@ const useStyles = makeStyles(theme => ({
 	}
 }));
 
-const Experiences = ({ experiences, loadExperiences, deleteExperience }) => {
+const Experiences = ({
+	experiences,
+	loadExperiences,
+	deleteExperience,
+	isDashboard = false,
+	user,
+	loadUserExperiences
+}) => {
 	useEffect(() => {
-		loadExperiences();
+		isDashboard ? loadUserExperiences(user.id) : loadExperiences();
 	}, []);
 
 	const classes = useStyles();
@@ -55,6 +66,7 @@ const Experiences = ({ experiences, loadExperiences, deleteExperience }) => {
 	function Add(params) {
 		history.push("/add");
 	}
+
 	return (
 		<>
 			<h1>
@@ -110,22 +122,30 @@ const Experiences = ({ experiences, loadExperiences, deleteExperience }) => {
 								<Button size="small" color="primary">
 									Learn More
 								</Button>
-								<Button
-									size="small"
-									color="primary"
-									style={{ marginLeft: "auto" }}
-								>
-									<Link to={`/edit/${experience.id}`}>
-										<EditIcon />
-									</Link>
-								</Button>
-								<Button size="small" color="primary">
-									<DeleteIcon
-										onClick={e =>
-											deleteExperience(experience.id)
-										}
-									/>
-								</Button>
+								{isDashboard === true ? (
+									<>
+										<Button
+											size="small"
+											color="primary"
+											style={{ marginLeft: "auto" }}
+										>
+											<Link to={`/edit/${experience.id}`}>
+												<EditIcon />
+											</Link>
+										</Button>
+										<Button size="small" color="primary">
+											<DeleteIcon
+												onClick={e =>
+													deleteExperience(
+														experience.id
+													)
+												}
+											/>
+										</Button>
+									</>
+								) : (
+									""
+								)}
 							</CardActions>
 						</Card>
 					</Grid>
@@ -137,6 +157,8 @@ const Experiences = ({ experiences, loadExperiences, deleteExperience }) => {
 
 // Step 8: Use "connect" to plug the component to redux
 // Step 9: Plug the action creators into the component
-export default connect(state => state, { loadExperiences, deleteExperience })(
-	Experiences
-);
+export default connect(state => state, {
+	loadUserExperiences,
+	loadExperiences,
+	deleteExperience
+})(Experiences);

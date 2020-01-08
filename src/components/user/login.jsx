@@ -34,7 +34,6 @@ const LogIn = ({ user, loginUser, history }) => {
   };
   return (
     <LoginForm>
-      {JSON.stringify(user)}
       <div className="topHalf">
         <img src={logo} alt="logo" />
         <h2>
