@@ -26,11 +26,10 @@ const Register = ({ user, registerUser, history }) => {
   };
   return (
     <LoginForm>
-      {JSON.stringify(user)}
       <div className="topHalf">
         <img src={logo} alt="logo" />
         <h2>
-          <NavLink className="navLink" to="/">
+          <NavLink className="navLink" to="/signin">
             Sign In
           </NavLink>
           / Register

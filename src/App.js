@@ -17,7 +17,12 @@ function App() {
 				<Route exact path="/" component={Experiences} />
 				<Route path="/signin" component={LogIn} />
 				<Route path="/register" component={Register} />
-				<Route path="/dashboard" component={Experiences} />
+				<Route
+					path="/dashboard"
+					render={props => (
+						<Experiences {...props} isDashboard={true} />
+					)}
+				/>
 				<Route path="/add" component={AddExperience} />
 				<Route path="/edit/:id" component={AddExperience} />
 				<Route path="/experience/:id" component={Experiences} />
