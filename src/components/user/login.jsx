@@ -6,7 +6,9 @@ import { connect } from "react-redux";
 import { loginUser } from "../../state/actionCreators";
 import logo from "../../images/logo.png";
 
-const LogIn = ({ user, loginUser }) => {
+// this has been kept
+
+const LogIn = ({ user, loginUser, history }) => {
   const [userData, setUserData] = useState({
     username: "",
     password: ""
@@ -17,12 +19,18 @@ const LogIn = ({ user, loginUser }) => {
       ...userData,
       [e.target.name]: e.target.value
     });
-    console.log(userData);
   };
 
   const handleSubmit = e => {
     e.preventDefault();
-    loginUser(userData);
+    loginUser(userData).then(res => {
+      if (res) {
+        history.push("/");
+      }
+    });
+    // let userdett = loginUser(userData);
+    // if (localStorage.getItem("token")) {
+    // }
   };
   return (
     <LoginForm>
@@ -30,7 +38,7 @@ const LogIn = ({ user, loginUser }) => {
       <div className="topHalf">
         <img src={logo} alt="logo" />
         <h2>
-          Sign In /{" "}
+          Sign In |{" "}
           <NavLink className="navLink" to="/register">
             Register
           </NavLink>
@@ -38,8 +46,6 @@ const LogIn = ({ user, loginUser }) => {
       </div>
 
       <div className="bottomHalf">
-        <br />
-        <br />
         <br />
         <br />
         <Form onSubmit={handleSubmit}>
@@ -68,9 +74,9 @@ const LogIn = ({ user, loginUser }) => {
           <br />
           <br />
           <br />
-          <NavLink to="/">
-            <Button>Sign In</Button>
-          </NavLink>
+          {/* <NavLink to="/"> */}
+          <Button>Sign In</Button>
+          {/* </NavLink> */}
         </Form>
       </div>
     </LoginForm>
@@ -103,6 +109,9 @@ const LoginForm = styled.form`
   }
   .bottomHalf {
     margin-left: 30%;
+  }
+  FormGroup {
+    border: 3px solid red;
   }
   button {
     color: #fe0202;
