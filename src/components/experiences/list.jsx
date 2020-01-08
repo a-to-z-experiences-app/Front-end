@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect } from "react";
-import { loadExperiences } from "../../state/actionCreators";
+import { loadExperiences, deleteExperience } from "../../state/actionCreators";
 import { connect } from "react-redux";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -26,12 +26,17 @@ const useStyles = makeStyles({
 	}
 });
 
-const Experiences = ({ experiences, loadExperiences }) => {
+const Experiences = ({ experiences, loadExperiences, deleteExperience }) => {
 	useEffect(() => {
 		loadExperiences();
 	}, []);
 
 	const classes = useStyles();
+
+	// const deleteExperienceFunc = id => {
+	// 	console.log("delete");
+	// 	deleteExperience(id);
+	// };
 
 	return (
 		<>
@@ -40,15 +45,15 @@ const Experiences = ({ experiences, loadExperiences }) => {
 			</h1>
 			<Grid container spacing={2}>
 				{experiences.map(experience => (
-					<Grid item xs={2}>
+					<Grid item xs={2} key={experience.id}>
 						<Card className={classes.card}>
 							<CardActionArea>
 								<CardMedia
 									className={classes.media}
 									image={
 										"https://picsum.photos/seed/" +
-										Math.floor(Math.random() * 100) +
-										"/200/300"
+										experience.id +
+										"/600/300"
 									}
 									title="Contemplative Reptile"
 								/>
@@ -81,7 +86,11 @@ const Experiences = ({ experiences, loadExperiences }) => {
 									color="primary"
 									style={{ marginLeft: "auto" }}
 								>
-									<DeleteIcon />
+									<DeleteIcon
+										onClick={e =>
+											deleteExperience(experience.id)
+										}
+									/>
 								</Button>
 							</CardActions>
 						</Card>
@@ -94,4 +103,6 @@ const Experiences = ({ experiences, loadExperiences }) => {
 
 // Step 8: Use "connect" to plug the component to redux
 // Step 9: Plug the action creators into the component
-export default connect(state => state, { loadExperiences })(Experiences);
+export default connect(state => state, { loadExperiences, deleteExperience })(
+	Experiences
+);
