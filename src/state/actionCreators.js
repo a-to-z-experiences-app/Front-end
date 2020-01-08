@@ -73,6 +73,23 @@ export const saveExperience = experience => dispatch => {
 		});
 };
 
+export const deleteExperience = id => dispatch => {
+	axiosWithAuth()
+		.delete("/experiences/" + id)
+		.then(response => {
+			console.log(response.data);
+			dispatch({
+				type: types.DELETE_EXPERIENCE,
+				payload: {
+					id: id
+				}
+			});
+		})
+		.catch(() => {
+			console.log("error!!!");
+		});
+};
+
 // Step 7: Design action creator functions
 // export const updateForm = ({ name, value }) => {
 // 	return {

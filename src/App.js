@@ -7,13 +7,14 @@ import { Route } from "react-router-dom";
 import Register from "./components/user/register";
 
 function App() {
-  return (
-    <>
-      <Experiences></Experiences>;
-      <Route exact path="/" component={LogIn} />
-      <Route path="/register" component={Register} />
-    </>
-  );
+	return (
+		<>
+			<Route exact path="/" component={LogIn} />
+			<Route path="/register" component={Register} />
+			<Route path="/experiences" component={Experiences} />
+			<Route path="/dashboard" component={Experiences} />
+		</>
+	);
 }
 
 export default App;
