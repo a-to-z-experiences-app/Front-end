@@ -7,7 +7,7 @@ import * as serviceWorker from "./serviceWorker";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 // yarn add redux react-redux redux-thunk
-import { experiencesReducer, userReducer } from "./state/reducers";
+import { experiencesReducer, userReducer, formReducer } from "./state/reducers";
 import { combineReducers, createStore, compose, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
@@ -15,8 +15,8 @@ import thunk from "redux-thunk";
 // Step 4: Use "combineReducers" to make a monster reducer
 const monsterReducer = combineReducers({
   user: userReducer,
-  experiences: experiencesReducer
-  // form: formReducer
+  experiences: experiencesReducer,
+  form: formReducer
 });
 
 // Step 5: use "createStore" to make a redux store
