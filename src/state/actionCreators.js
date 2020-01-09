@@ -30,40 +30,40 @@ export const filterExperiences = search => dispatch => {
 
 // Step 7: Design action creator functions
 export const loadUserExperiences = userID => dispatch => {
-  axiosWithAuth()
-    .get("/users/" + userID + "/host_experiences")
-    .then(response => {
-      console.log(response.data.experiences);
+	axiosWithAuth()
+		.get("/users/" + userID + "/host_experiences")
+		.then(response => {
+			console.log(response.data.experiences);
 
-      dispatch({
-        type: types.GET_EXPERIENCES,
-        payload: {
-          experiences: response.data.experiences
-        }
-      });
-    })
-    .catch(() => {
-      console.log("error!!!");
-    });
+			dispatch({
+				type: types.GET_EXPERIENCES,
+				payload: {
+					experiences: response.data.experiences
+				}
+			});
+		})
+		.catch(() => {
+			console.log("error!!!");
+		});
 };
 
 export const loginUser = loginData => async dispatch => {
-  try {
-    const { data } = await axiosWithAuth().post("/login", loginData);
-    if (data.token) {
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
-      dispatch({
-        type: types.LOGIN,
-        payload: {
-          user: data.user
-        }
-      });
-      return true;
-    }
-  } catch (error) {
-    console.log(error);
-  }
+	try {
+		const { data } = await axiosWithAuth().post("/login", loginData);
+		if (data.token) {
+			localStorage.setItem("token", data.token);
+			localStorage.setItem("user", JSON.stringify(data.user));
+			dispatch({
+				type: types.LOGIN,
+				payload: {
+					user: data.user
+				}
+			});
+			return true;
+		}
+	} catch (error) {
+		console.log(error);
+	}
 };
 
 export const registerUser = data => dispatch => {
@@ -119,20 +119,26 @@ export const saveExperience = (experience, userID, history) => dispatch => {
 };
 
 export const getExperience = id => dispatch => {
-  axiosWithAuth()
-    .get("/experiences/" + id)
-    .then(response => {
-      console.log(response.data);
-      dispatch({
-        type: types.EDIT,
-        payload: {
-          experience: response.data
-        }
-      });
-    })
-    .catch(() => {
-      console.log("error!!!");
-    });
+	axiosWithAuth()
+		.get("/experiences/" + id)
+		.then(response => {
+			console.log(response.data);
+			dispatch({
+				type: types.EDIT,
+				payload: {
+					experience: response.data
+				}
+			});
+			dispatch({
+				type: types.SET_EXPERIENCE,
+				payload: {
+					experience: response.data
+				}
+			});
+		})
+		.catch(() => {
+			console.log("error!!!");
+		});
 };
 
 export const deleteExperience = id => dispatch => {
@@ -153,32 +159,32 @@ export const deleteExperience = id => dispatch => {
 };
 
 export const updateForm = ({ name, value }) => {
-  return {
-    type: types.UPDATE_FORM,
-    payload: {
-      name,
-      value
-    }
-  };
+	return {
+		type: types.UPDATE_FORM,
+		payload: {
+			name,
+			value
+		}
+	};
 };
 
 export const updateUser = (data, id) => dispatch => {
-  console.log(data);
-  axiosWithAuth()
-    .put(`/users/${id}`, data)
-    .then(response => {
-      console.log(response.data);
-      localStorage.setItem("user", response.data.user);
-      dispatch({
-        type: types.UPDATE_USER,
-        payload: {
-          user: data
-        }
-      });
-    })
-    .catch(error => {
-      console.log("error!!!", error.response);
-    });
+	console.log(data);
+	axiosWithAuth()
+		.put(`/users/${id}`, data)
+		.then(response => {
+			console.log(response.data);
+			localStorage.setItem("user", response.data.user);
+			dispatch({
+				type: types.UPDATE_USER,
+				payload: {
+					user: data
+				}
+			});
+		})
+		.catch(error => {
+			console.log("error!!!", error.response);
+		});
 };
 
 export const getUserProfile = id => dispatch => {

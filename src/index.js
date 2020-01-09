@@ -8,10 +8,11 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 // yarn add redux react-redux redux-thunk
 import {
-  experiencesReducer,
-  userReducer,
-  formReducer,
-  userProfileReducer
+	experiencesReducer,
+	userReducer,
+	formReducer,
+  userProfileReducer,
+	experienceReducer
 } from "./state/reducers";
 import { combineReducers, createStore, compose, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
@@ -22,27 +23,29 @@ const monsterReducer = combineReducers({
   user: userReducer,
   experiences: experiencesReducer,
   form: formReducer,
-  userProfile: userProfileReducer
+  userProfile: userProfileReducer,
+	experience: experienceReducer
 });
 
 // Step 5: use "createStore" to make a redux store
 const store = createStore(
-  monsterReducer, // we need the second arg to enable redux devtools
-  {},
-  compose(
-    applyMiddleware(thunk /* ,etc , other middlewares */),
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-  )
+	monsterReducer, // we need the second arg to enable redux devtools
+	{},
+	compose(
+		applyMiddleware(thunk /* ,etc , other middlewares */),
+		window.__REDUX_DEVTOOLS_EXTENSION__ &&
+			window.__REDUX_DEVTOOLS_EXTENSION__()
+	)
 );
 
 ReactDOM.render(
-  // Step 6: use "Provider" to inject the store into the app
-  <Provider store={store}>
-    <Router>
-      <App />
-    </Router>
-  </Provider>,
-  document.getElementById("root")
+	// Step 6: use "Provider" to inject the store into the app
+	<Provider store={store}>
+		<Router>
+			<App />
+		</Router>
+	</Provider>,
+	document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

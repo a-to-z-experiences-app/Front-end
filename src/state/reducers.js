@@ -13,7 +13,8 @@ const initialState = {
     date: new Date(),
     description: ""
   },
-  userProfile: {}
+  userProfile: {},
+	experience: {}
 };
 
 // STEP 3: create reducers
@@ -90,4 +91,17 @@ export function userProfileReducer(
     default:
       return userProfile;
   }
+}
+
+// STEP 3: create reducers
+export function experienceReducer(
+	experience = initialState.experience,
+	action
+) {
+	switch (action.type) {
+		case types.SET_EXPERIENCE:
+			return action.payload.experience;
+		default:
+			return experience;
+	}
 }
