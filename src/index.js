@@ -11,6 +11,7 @@ import {
 	experiencesReducer,
 	userReducer,
 	formReducer,
+  userProfileReducer,
 	experienceReducer
 } from "./state/reducers";
 import { combineReducers, createStore, compose, applyMiddleware } from "redux";
@@ -19,9 +20,10 @@ import thunk from "redux-thunk";
 
 // Step 4: Use "combineReducers" to make a monster reducer
 const monsterReducer = combineReducers({
-	user: userReducer,
-	experiences: experiencesReducer,
-	form: formReducer,
+  user: userReducer,
+  experiences: experiencesReducer,
+  form: formReducer,
+  userProfile: userProfileReducer,
 	experience: experienceReducer
 });
 
