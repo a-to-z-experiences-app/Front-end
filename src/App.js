@@ -11,6 +11,8 @@ import PrivateRoute from "./helpers/privateRoute";
 import Container from "@material-ui/core/Container";
 import User from "./components/user/user";
 
+import Experience from "./components/experiences/experience";
+
 function App() {
   return (
     <>
@@ -21,13 +23,20 @@ function App() {
             <Route exact path="/" component={Experiences} />
             <Route path="/signin" component={LogIn} />
             <Route path="/register" component={Register} />
-            <PrivateRoute
-              path="/dashboard"
-              render={props => <Experiences {...props} isDashboard={true} />}
+            <Route
+                path="/dashboard"
+                component={props => {
+                    return (
+                        <Experiences
+                            {...props}
+                            isDashboard={true}
+                        />
+                    );
+                }}
             />
             <PrivateRoute path="/add" component={AddExperience} />
             <PrivateRoute path="/edit/:id" component={AddExperience} />
-            <PrivateRoute path="/experience/:id" component={Experiences} />
+            <Route path="/experience/:id" component={Experience} />
             <PrivateRoute
               path="/profile"
               component={props => <User {...props} />}
