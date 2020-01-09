@@ -10,6 +10,7 @@ import PrivateRoute from "./helpers/privateRoute";
 
 import Container from "@material-ui/core/Container";
 import User from "./components/user/user";
+import UserProfile from "./components/user/userprofile";
 
 function App() {
   return (
@@ -32,7 +33,7 @@ function App() {
               path="/profile"
               component={props => <User {...props} />}
             />
-            {/* <PrivateRoute path="/user/:id" component={""} /> */}
+            <Route path="/user/:id" component={UserProfile} />
           </Switch>
         </Container>
       </Router>

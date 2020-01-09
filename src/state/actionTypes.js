@@ -3,6 +3,7 @@ export const REGISTER = "REGISTER";
 export const LOGIN = "LOGIN";
 export const UPDATE_USER = "UPDATE_USER";
 export const DELETE_USER = "DELETE_USER";
+export const SET_USERPROFILE = "SET_USERPROFILE";
 
 export const CREATE_EXPERIENCE = "CREATE_EXPERIENCE";
 export const READ_EXPERIENCE = "READ_EXPERIENCE";
