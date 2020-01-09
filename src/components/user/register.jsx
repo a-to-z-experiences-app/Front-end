@@ -30,9 +30,9 @@ const Register = ({ user, registerUser, history }) => {
         <img src={logo} alt="logo" />
         <h2>
           <NavLink className="navLink" to="/signin">
-            Sign In
+            Sign In{" "}
           </NavLink>
-          / Register
+          | Register
         </h2>
       </div>
 
@@ -44,7 +44,7 @@ const Register = ({ user, registerUser, history }) => {
               name="username"
               id="username"
               placeholder="username"
-              value={userData.email}
+              value={userData.username}
               onChange={handleChange}
             />
           </FormGroup>
@@ -65,7 +65,7 @@ const Register = ({ user, registerUser, history }) => {
           <FormGroup>
             <Input
               type="text"
-              name="first name"
+              name="first_name"
               id="first_name"
               placeholder="first name"
               value={userData.first_name}
@@ -77,7 +77,7 @@ const Register = ({ user, registerUser, history }) => {
           <FormGroup>
             <Input
               type="text"
-              name="first name"
+              name="last_name"
               id="last_name"
               placeholder="last name"
               value={userData.last_name}
