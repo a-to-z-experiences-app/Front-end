@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import {
 	loadUserExperiences,
 	loadExperiences,
+	filterExperiences,
 	deleteExperience
 } from "../../state/actionCreators";
 import { connect } from "react-redux";
@@ -23,7 +24,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import AddIcon from "@material-ui/icons/Add";
 import Fab from "@material-ui/core/Fab";
-import add from "./add";
+
+import queryString from "query-string";
 
 const useStyles = makeStyles(theme => ({
 	card: {
@@ -46,21 +48,26 @@ const Experiences = ({
 	deleteExperience,
 	isDashboard = false,
 	user,
-	loadUserExperiences
+	loadUserExperiences,
+	filterExperiences,
+	location
 }) => {
+	// useEffect(() => {
+	// 	isDashboard ? loadUserExperiences(user.id) : loadExperiences();
+	// }, []);
+
 	useEffect(() => {
-		isDashboard ? loadUserExperiences(user.id) : loadExperiences();
-	}, []);
+		const search = queryString.parse(location.search);
+		console.log(search.search);
+		if (search.search === "" || search.search === undefined) {
+			isDashboard ? loadUserExperiences(user.id) : loadExperiences();
+		} else {
+			filterExperiences(search);
+		}
+	}, [location.search]);
 
 	const classes = useStyles();
 	const token = localStorage.getItem("token");
-	console.log(token);
-
-	// const deleteExperienceFunc = id => {
-	// 	console.log("delete");
-	// 	deleteExperience(id);
-	// };
-
 	let history = useHistory();
 
 	function Add(params) {
@@ -74,16 +81,18 @@ const Experiences = ({
 			</h1>
 			<br />
 			<Grid container spacing={2}>
-				<Fab
-					color="primary"
-					aria-label="add"
-					className={classes.fab}
-					onClick={e => {
-						Add();
-					}}
-				>
-					<AddIcon />
-				</Fab>
+				{user !== null && user !== undefined && (
+					<Fab
+						color="primary"
+						aria-label="add"
+						className={classes.fab}
+						onClick={e => {
+							Add();
+						}}
+					>
+						<AddIcon />
+					</Fab>
+				)}
 				{experiences.length === 0 ? "No experiences atm" : ""}
 				{experiences.map(experience => (
 					<Grid item xs={3} key={experience.id}>
@@ -160,5 +169,6 @@ const Experiences = ({
 export default connect(state => state, {
 	loadUserExperiences,
 	loadExperiences,
+	filterExperiences,
 	deleteExperience
 })(Experiences);
