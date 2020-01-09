@@ -12,7 +12,8 @@ const initialState = {
 		price: 1,
 		date: new Date(),
 		description: ""
-	}
+	},
+	experience: {}
 };
 
 // STEP 3: create reducers
@@ -84,5 +85,18 @@ export function formReducer(form = initialState.form, action) {
 			return initialState.form;
 		default:
 			return form;
+	}
+}
+
+// STEP 3: create reducers
+export function experienceReducer(
+	experience = initialState.experience,
+	action
+) {
+	switch (action.type) {
+		case types.SET_EXPERIENCE:
+			return action.payload.experience;
+		default:
+			return experience;
 	}
 }

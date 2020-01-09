@@ -74,6 +74,10 @@ const Experiences = ({
 		history.push("/add");
 	}
 
+	const goTo = id => {
+		history.push("/experience/" + id);
+	};
+
 	return (
 		<>
 			<h1>
@@ -96,7 +100,10 @@ const Experiences = ({
 				{experiences.length === 0 ? "No experiences atm" : ""}
 				{experiences.map(experience => (
 					<Grid item xs={3} key={experience.id}>
-						<Card className={classes.card}>
+						<Card
+							className={classes.card}
+							onClick={e => goTo(experience.id)}
+						>
 							<CardActionArea>
 								<CardMedia
 									className={classes.media}
