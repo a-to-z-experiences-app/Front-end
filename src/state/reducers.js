@@ -49,6 +49,18 @@ export function experiencesReducer(
 			);
 		case types.GET_EXPERIENCES:
 			return action.payload.experiences;
+		case types.FILTER_EXPERIENCES:
+			return experiences.filter(
+				experience =>
+					experience.title.includes(action.payload.filter.search) ||
+					experience.description.includes(
+						action.payload.filter.search
+					) ||
+					experience.location.includes(
+						action.payload.filter.search
+					) ||
+					experience.price.includes(action.payload.filter.search)
+			);
 		default:
 			return experiences;
 	}
@@ -68,6 +80,8 @@ export function formReducer(form = initialState.form, action) {
 		// 	return initialState.form;
 		case types.EDIT:
 			return action.payload.experience;
+		case types.CLEAR_FORM:
+			return initialState.form;
 		default:
 			return form;
 	}
