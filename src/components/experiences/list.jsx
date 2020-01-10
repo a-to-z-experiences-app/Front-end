@@ -100,11 +100,8 @@ const Experiences = ({
 				{experiences.length === 0 ? "No experiences atm" : ""}
 				{experiences.map(experience => (
 					<Grid item xs={3} key={experience.id}>
-						<Card
-							className={classes.card}
-							onClick={e => goTo(experience.id)}
-						>
-							<CardActionArea>
+						<Card className={classes.card}>
+							<CardActionArea onClick={e => goTo(experience.id)}>
 								<CardMedia
 									className={classes.media}
 									image={
