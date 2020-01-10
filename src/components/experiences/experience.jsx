@@ -3,6 +3,7 @@ import React from "react";
 import { getExperience } from "../../state/actionCreators";
 import { connect } from "react-redux";
 import { useParams } from "react-router";
+import { NavLink } from "react-router-dom";
 
 import ScheduleIcon from "@material-ui/icons/Schedule";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
@@ -29,7 +30,9 @@ const Experience = ({ getExperience, location, experience }) => {
 				<ScheduleIcon /> {(experience.date || "").slice(0, 10)} <br />
 				<LocationOnIcon /> {experience.location} <br />
 				<AccountCircleIcon />{" "}
-				<a href={"/user/" + experience.user_id}>{experience.user_id}</a>
+				<NavLink to={"/user/" + experience.user_id}>
+					{experience.user_id}
+				</NavLink>
 			</p>
 			<p style={{ fontSize: "25px" }}>{experience.description}</p>
 		</>
